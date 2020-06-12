@@ -36,16 +36,16 @@ def insert_jobs_to_db(db_name):
 
             # Разделяем составляющее зарплаты на три колонки
             if re.match(r'от', price):
-                min_sal = re.split(r' ', price)[1].replace('\xa0', '')
+                min_sal = int(re.split(r' ', price)[1].replace('\xa0', ''))
                 max_sal = None
                 cur = re.split(r' ', price)[2]
             elif re.search(r'-', price):
-                min_sal = re.split(r'-', price)[0].replace('\xa0', '')
-                max_sal = re.split(r'-', price)[1].replace('\xa0', '').split()[0]
+                min_sal = int(re.split(r'-', price)[0].replace('\xa0', ''))
+                max_sal = int(re.split(r'-', price)[1].replace('\xa0', '').split()[0])
                 cur = re.split(r'-', price)[1].replace('\xa0', '').split()[1]
             elif re.match(r'до', price):
                 min_sal = None
-                max_sal = re.split(r' ', price)[1].replace('\xa0', '')
+                max_sal = int(re.split(r' ', price)[1].replace('\xa0', ''))
                 cur = re.split(r' ', price)[2]
             else:
                 min_sal = None
@@ -75,4 +75,4 @@ def insert_jobs_to_db(db_name):
     db.jobs.insert_many(jobs)
 
 
-insert_jobs_to_db('jobs')
+insert_jobs_to_db('my_jobs')
