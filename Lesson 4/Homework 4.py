@@ -44,8 +44,8 @@ blocks = dom.xpath("//div[@class='stories-set stories-set_main_no stories-set_po
 
 for block in blocks:
     item = {}
-    name = block.xpath(".//div//h2//a/text()")
-    a = block.xpath(".//div//h2//a/@href")
+    name = block.xpath(".//h2[@class='story__title']//text()")
+    a = block.xpath(".//h2[@class='story__title']//@href")
     date_time = block.xpath(".//div[@class='story__date']/text()")
     item['name'] = name[0]
     item['url'] = 'https://yandex.ru' + str(a[0])
